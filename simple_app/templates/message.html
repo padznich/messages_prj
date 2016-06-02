@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Message {{message.id}}
+{% endblock %}
+
+{% block sidebar %}
+    <h1 style="color:#4C420F; font-family:'Lobster';">Message {{message.id}}</h1>
+{% endblock %}
+
+{% block content %}
+
+<p><b> {{ message.title }} </b></p>
+<p> {{ message.text }} </p>
+{% for comment in comments %}
+    <p>{{ comment.level }} <b>[{{ comment.added_at }}]</b> {{ comment.text }}</p>
+{% endfor %}
+{% endblock %}

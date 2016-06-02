@@ -16,6 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from simple_app import views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+
+    url(r'^$', views.show_messages),
+    url(r'^add_message/$', views.add_message),
+    url(r'^message/(?P<id>\d+)/?', views.choosen_message),
 ]

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home page
+{% endblock %}
+
+{% block sidebar %}
+<h1 style="color:#4C420F; font-family:'Lobster';">Home</h1>
+{% endblock %}
+
+{% block content %}
+
+    {% for message in messages %}
+    <a href="/message/{{ message.id}}"><p>{{ message.id }} {{ message.text }}</p></a>
+    {% endfor %}
+
+    <span><span class="pagination">
+    {% for p in paginator.page_range %}
+     {% if p == page.number %}
+     <span class="active">
+     {% else %}
+     <span>
+     {% endif %}
+      <a href="{{ paginator.baseurl }}{{ p }}">
+      {{ p }}</a>
+    </span>
+    {% endfor %}
+    </span></span>
+
+{% endblock %}
