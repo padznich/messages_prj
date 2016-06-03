@@ -9,10 +9,84 @@
 {% endblock %}
 
 {% block content %}
-
+<fieldset>
 <p><b> {{ message.title }} </b></p>
 <p> {{ message.text }} </p>
+</fieldset>
+<a class="link1" href="#">Comment</a>
 {% for comment in comments %}
-    <p>{{ comment.level }} <b>[{{ comment.added_at }}]</b> {{ comment.text }}</p>
+    <p>{{ comment.level }} <b>[{{ comment.added_at }}]</b> {{ comment.text }}
+    <a class="link1" href="#">Comment</a></p>
 {% endfor %}
+<br/>
+<div class="pagination">
+    {% if comments.has_previous %}
+        <a href="?page={{ comments.previous_page_number }}">←</a>
+    {% endif %}
+
+    {% for num in comments.paginator.page_range %}
+        {% if num == comments.number %}
+            <span class="current"><b>{{ num }}</b></span>
+        {% else %}
+            <a href="?page={{ num }}"> {{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if comments.has_next %}
+        <a href="?page={{ comments.next_page_number }}">→</a>
+    {% endif %}
+</div>
+
+<!--<form class="form-horizontal" method="post" action="">{% csrf_token %}-->
+    <!--<fieldset>-->
+        <!--{% for field in form %}-->
+        <!--<div class="control-group-->
+            <!--{% if field.errors %}has-error{% endif %}">-->
+            <!--<label class="control-label">{{ field.label }}</label>-->
+            <!--<div class="controls">{{ field }}</div>-->
+        <!--</div>-->
+        <!--{% endfor %}-->
+    <!--</fieldset>-->
+    <!--<div class="form-actions">-->
+        <!--<button type="submit" class="btn btn-primary">-->
+            <!--Post-->
+        <!--</button>-->
+    <!--</div>-->
+<!--</form>-->
+
+<div id="content1" style="display: none;">
+    {% include 'form.html' %}
+</div>
+<script>
+    $(document).ready(function () {
+        $('a.link1').click(function (e) {
+            $(this).toggleClass('active');
+            $('#content1').toggle();
+
+            e.stopPropagation();
+        });
+
+    $('body').click(function () {
+        var link = $('a.link1');
+        if (link.hasClass('active')) {
+            link.click();
+        }
+    });
+});
+</script>
+<script>
+$(document).on('submit', 'form.dynamic-form', function(form) {
+  var $form = $(f);
+
+  $.ajax({
+    type: form.method,
+    url: form.action,
+    data: $form.serialize(),
+    success: function(data) {
+      $form.replace(data);
+    }
+  });
+});
+</script>
+
 {% endblock %}

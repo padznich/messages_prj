@@ -1,5 +1,4 @@
 from django import forms
-from django.core.urlresolvers import reverse
 
 from models import Message, Comment
 
@@ -39,6 +38,5 @@ class CommentForm(forms.Form):
 
     def save(self):
         comment = Comment(**self.cleaned_data)
-        comment.parent = ('%s-%03d' % (comment.parent.path, self.id, ))[:255]
         comment.save()
         return comment

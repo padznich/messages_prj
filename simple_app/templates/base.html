@@ -13,8 +13,9 @@
     <a href="/">Home</a>
     <a href="/add_message/">Add message</a>
   </span>
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
   {% block sidebar %}<h1>Hello, world!</h1>{% endblock %}
   {% block content %}{% endblock %}
-  <script src="{% static 'js/bootstrap.min.js' %}"></script>
   </body>
 </html>

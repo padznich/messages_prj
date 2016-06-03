@@ -1,0 +1,7 @@
+<form action="/message/{{ message.id }}/" method="POST" class="dynamic-form">
+  {% csrf_token %}
+  {{ form }}
+  <button type="submit">Add comment</button>
+  <button type="reset">Cancel</button>
+</form>
+
